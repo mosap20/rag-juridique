@@ -21,7 +21,7 @@ réponse avec des citations vers les articles et les pages du PDF.
 Python 3.10 ou plus récent est nécessaire.
 
 ```powershell
-py -3.10 -m venv .venv
+py -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
 pip install -r requirements.txt
@@ -92,7 +92,16 @@ valeur. Les scores affichés sont calculés par l’application sur le fichier c
 - Les performances dépendent du modèle téléchargé, des paramètres et des annotations. Indiquez
   ces éléments lors de la comparaison des résultats.
 
+## Organisation du code
+
+- [app.py](app.py) et [pages/](pages/) contiennent les écrans Streamlit.
+- [corpus.py](bam_rag/corpus.py) extrait les articles et leurs références de page. [chunking.py](bam_rag/chunking.py) produit les passages à indexer.
+- [retrieval.py](bam_rag/retrieval.py) implémente les trois méthodes et [answer.py](bam_rag/answer.py) prépare la réponse Gemini.
+- [evaluation.py](bam_rag/evaluation.py) calcule les métriques de classement à partir des annotations.
+
 ## Tests
+
+Les tests couvrent la segmentation des articles, le suivi des pages sources et le calcul des métriques sur des exemples synthétiques. Ils ne nécessitent ni le recueil ni une clé Gemini.
 
 ```powershell
 python -m pytest
